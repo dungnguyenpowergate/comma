@@ -11,6 +11,7 @@ module Comma
       end
 
       def extract(sym, &block)
+        byebug
         yield_block_with_value(extract_value(sym), &block)
       end
 
