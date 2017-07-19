@@ -11,7 +11,6 @@ module Comma
       end
 
       def extract(sym, &block)
-        byebug
         yield_block_with_value(extract_value(sym), &block)
       end
 
@@ -22,7 +21,8 @@ module Comma
       end
 
       def extract_value(method)
-        extraction_object.send(method)
+        result = extraction_object.send(method)
+        result[0] = "'#{result.first}'" if result.present? && ["=", "+", "-"].include?(result.first)
       end
 
       def extraction_object
